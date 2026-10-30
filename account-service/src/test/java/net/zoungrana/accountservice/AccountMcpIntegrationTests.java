@@ -14,6 +14,7 @@ import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@org.springframework.test.context.TestPropertySource(properties = {"spring.cloud.config.enabled=false", "spring.cloud.discovery.enabled=false", "BANK_CONFIG_IMPORT=optional:classpath:/disabled-config.properties", "bank.transaction.max-amount=1000"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AccountMcpIntegrationTests {
     @LocalServerPort

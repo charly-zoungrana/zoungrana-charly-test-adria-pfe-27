@@ -16,6 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.*;
 import static org.assertj.core.api.Assertions.*;
 
+@org.springframework.test.context.TestPropertySource(properties = {"spring.cloud.config.enabled=false", "spring.cloud.discovery.enabled=false", "BANK_CONFIG_IMPORT=optional:classpath:/disabled-config.properties", "bank.transaction.max-amount=1000"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AccountDebitIntegrationTests {
     @Autowired AccountService accounts;

@@ -1,6 +1,7 @@
 package net.zoungrana.transactionservice.domain;
 
 import jakarta.persistence.*;
+import net.zoungrana.transactionservice.model.Account;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -25,4 +26,8 @@ public class Transaction {
     private Instant createdAt;
     @Column(nullable = false)
     private String processingStatus;
+
+    @Transient
+    private Account account;
+
 }

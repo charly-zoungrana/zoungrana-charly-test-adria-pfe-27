@@ -30,7 +30,7 @@ public class TransactionServiceApplication {
         return args -> {
             try {
                 var accounts = accountGateway.getAllAccounts().stream()
-                        .filter(account -> "ACTIVE".equals(account.status())).toList();
+                        .filter(account -> "ACTIVE".equals(account.getStatus())).toList();
                 if (accounts.size() < 2) {
                     log.warn("Demo transactions skipped: at least two active accounts are required");
                     return;
@@ -38,14 +38,14 @@ public class TransactionServiceApplication {
                 var first = accounts.get(0);
                 var second = accounts.get(1);
                 List<Transaction> transactions = List.of(
-                        Transaction.builder().accountId(first.id())
-                                .amount(new BigDecimal("250.00")).currency(first.currency())
+                        Transaction.builder().accountId(first.getId())
+                                .amount(new BigDecimal("250.00")).currency(first.getCurrency())
                                 .merchantCategory("GROCERY").country("MA").build(),
-                        Transaction.builder().accountId(first.id())
-                                .amount(new BigDecimal("125.50")).currency(first.currency())
+                        Transaction.builder().accountId(first.getId())
+                                .amount(new BigDecimal("125.50")).currency(first.getCurrency())
                                 .merchantCategory("TRANSPORT").country("MA").build(),
-                        Transaction.builder().accountId(second.id())
-                                .amount(new BigDecimal("500.00")).currency(second.currency())
+                        Transaction.builder().accountId(second.getId())
+                                .amount(new BigDecimal("500.00")).currency(second.getCurrency())
                                 .merchantCategory("SHOPPING").country("MA").build());
                 transactions.forEach(transactionService::saveTransaction);
             } catch (RuntimeException ex) {

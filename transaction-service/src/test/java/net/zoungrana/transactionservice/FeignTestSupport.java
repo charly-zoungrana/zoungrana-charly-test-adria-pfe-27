@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@org.springframework.test.context.TestPropertySource(properties = {"spring.cloud.config.enabled=false", "spring.cloud.discovery.enabled=false", "BANK_CONFIG_IMPORT=optional:classpath:/disabled-config.properties", "bank.transaction.max-amount=1000"})
 abstract class FeignTestSupport {
     static final JsonMapper JSON = new JsonMapper();
     static final Map<UUID, BigDecimal> BALANCES = new ConcurrentHashMap<>();

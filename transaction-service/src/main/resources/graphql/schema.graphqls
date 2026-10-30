@@ -16,6 +16,7 @@ type Transaction {
     country: String
     createdAt: String!
     processingStatus: String!
+    account: Account
 }
 
 input TransactionInput {
@@ -24,4 +25,11 @@ input TransactionInput {
     currency: String!
     merchantCategory: String
     country: String
+}
+type Account {
+    id: ID!
+    customerReference: String
+    status: String
+    currency: String
+    balance: String
 }

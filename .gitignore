@@ -36,3 +36,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# Local service processes and verification logs
+.runtime/
+*.log
+
+# Local environment files
+.env
+.env.*
+!.env.example

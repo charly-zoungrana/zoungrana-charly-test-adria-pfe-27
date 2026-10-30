@@ -1,0 +1,40 @@
+@gateway = http://localhost:8888
+
+### Eureka registry
+GET http://localhost:8761/eureka/apps
+Accept: application/json
+
+### Configuration shared by Config Server
+GET http://localhost:9999/transaction-service/default
+
+### Accounts through Gateway
+GET {{gateway}}/accounts
+
+> {% client.global.set("accountId", response.body.find(account => account.status === "ACTIVE").id); %}
+
+### Transactions through Gateway
+GET {{gateway}}/transactions
+
+### Create transaction through Gateway (Feign resolves account-service through Eureka)
+POST {{gateway}}/transactions
+Content-Type: application/json
+
+{
+  "accountId": "{{accountId}}", "amount": 25.50, "currency": "MAD",
+  "merchantCategory": "GROCERY", "country": "MA"
+}
+
+### GraphQL - accounts
+POST {{gateway}}/account-service/graphql
+Content-Type: application/json
+
+{ "query": "{ getAllAccounts { id customerReference currency balance } }" }
+
+### GraphQL - transactions
+POST {{gateway}}/transaction-service/graphql
+Content-Type: application/json
+
+{ "query": "{ getAllTransactions { id accountId amount processingStatus createdAt } }" }
+
+### Gateway readiness
+GET {{gateway}}/actuator/health/readiness

@@ -3,6 +3,8 @@ package net.zoungrana.transactionservice;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import net.zoungrana.transactionservice.feign.AccountGateway;
+import net.zoungrana.transactionservice.feign.AccountClient;
+import org.springframework.aop.support.AopUtils;
 import net.zoungrana.transactionservice.domain.Transaction;
 import net.zoungrana.transactionservice.repository.TransactionRepository;
 import net.zoungrana.transactionservice.service.TransactionService;
@@ -21,6 +23,7 @@ class OpenFeignIntegrationTests extends FeignTestSupport {
     @Autowired TransactionService transactions;
     @Autowired TransactionRepository repository;
     @Autowired AccountGateway accounts;
+    @Autowired AccountClient accountClient;
     @Autowired CircuitBreakerRegistry breakers;
 
     @AfterEach
@@ -33,7 +36,7 @@ class OpenFeignIntegrationTests extends FeignTestSupport {
         BALANCES.put(id, new BigDecimal("1000.12345678"));
         Transaction saved = transactions.saveTransaction(transaction(id, "100.00000001"));
         assertThat(saved.getProcessingStatus()).isEqualTo("COMPLETED");
-        assertThat(accounts.getAccountById(id).balance()).isEqualByComparingTo("900.12345677");
+        assertThat(accounts.getAccountById(id).getBalance()).isEqualByComparingTo("900.12345677");
         assertThat(GET_CALLS.get(id).get()).isGreaterThanOrEqualTo(2);
     }
 
@@ -104,6 +107,50 @@ class OpenFeignIntegrationTests extends FeignTestSupport {
         assertThatThrownBy(() -> transactions.retryTransaction(failed.getId())).isInstanceOf(ResponseStatusException.class);
     }
 
+    @Test
+    void includesLiveAccountOnReadsWithoutPersistingItOrFetchingDuplicates() {
+        UUID id = UUID.randomUUID();
+        Transaction first = transactions.saveTransaction(transaction(id, "10"));
+        transactions.saveTransaction(transaction(id, "20"));
+        assertThat(repository.findById(first.getId()).orElseThrow().getAccount()).isNull();
+        Transaction enriched = transactions.getTransactionById(first.getId());
+        assertThat(enriched.getAccount().getId()).isEqualTo(id);
+        assertThat(enriched.getAccount().getBalance()).isEqualByComparingTo("9970");
+        int callsBefore = GET_CALLS.get(id).get();
+        assertThat(transactions.getAllTransactions()).filteredOn(t -> id.equals(t.getAccountId()))
+                .hasSize(2).allSatisfy(t -> assertThat(t.getAccount().getId()).isEqualTo(id));
+        assertThat(GET_CALLS.get(id).get() - callsBefore).isEqualTo(1);
+    }
+
+    @Test
+    void accountOutageOnTransactionReadDoesNotReturnAFabricatedAccount() {
+        UUID id = UUID.randomUUID();
+        Transaction saved = transactions.saveTransaction(transaction(id, "10"));
+        UNAVAILABLE.add(id);
+        try {
+            assertThatThrownBy(() -> transactions.getTransactionById(saved.getId()))
+                    .isInstanceOfSatisfying(ResponseStatusException.class,
+                            ex -> assertThat(ex.getStatusCode().value()).isEqualTo(503));
+        } finally {
+            UNAVAILABLE.remove(id);
+        }
+    }
+    @Test
+    void annotationOnFeignClientInvokesDefaultFallbackWhenCircuitIsOpen() {
+        assertThat(AopUtils.isAopProxy(accountClient)).isTrue();
+        UUID id = UUID.randomUUID();
+        breakers.circuitBreaker("accountService").transitionToOpenState();
+        assertThatThrownBy(() -> accountClient.getAccountById(id))
+                .isInstanceOfSatisfying(ResponseStatusException.class, ex -> {
+                    assertThat(ex.getStatusCode().value()).isEqualTo(503);
+                    assertThat(ex.getReason()).contains("circuit breaker is open");
+                });
+        assertThat(GET_CALLS).doesNotContainKey(id);
+        assertThatThrownBy(accountClient::getAllAccounts).isInstanceOf(ResponseStatusException.class);
+        assertThatThrownBy(() -> accountClient.debitAccount(id,
+                new AccountClient.DebitRequest(UUID.randomUUID(), BigDecimal.ONE, "MAD")))
+                .isInstanceOf(ResponseStatusException.class);
+    }
     private Transaction transaction(UUID id, String amount) {
         return Transaction.builder().accountId(id).amount(new BigDecimal(amount))
                 .currency("MAD").merchantCategory("FEIGN-TEST").country("MA").build();

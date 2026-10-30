@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import net.zoungrana.transactionservice.model.Account;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,6 +51,10 @@ public class TransactionGraphQLController {
         return transaction.getCreatedAt().toString();
     }
 
+    @SchemaMapping(typeName = "Account", field = "balance")
+    public String balance(Account account) {
+        return account.getBalance() == null ? null : account.getBalance().toPlainString();
+    }
     public record TransactionInput(String accountId, String amount, String currency,
                                    String merchantCategory, String country) {
     }

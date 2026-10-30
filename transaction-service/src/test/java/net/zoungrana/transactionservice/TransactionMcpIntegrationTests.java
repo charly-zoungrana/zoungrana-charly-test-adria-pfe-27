@@ -52,7 +52,7 @@ class TransactionMcpIntegrationTests extends FeignTestSupport {
             HttpResponse<String> found = send(client, session,
                     "{\"jsonrpc\":\"2.0\",\"id\":4,\"method\":\"tools/call\",\"params\":{"
                     + "\"name\":\"getTransactionById\",\"arguments\":{\"id\":\"" + id + "\"}}}");
-            assertThat(found.body()).contains(id, "mcp-test").doesNotContain("\"isError\":true");
+            assertThat(found.body()).contains(id, "mcp-test", "test-account").doesNotContain("\"isError\":true");
 
             HttpResponse<String> accounts = send(client, session, """
                     {"jsonrpc":"2.0","id":5,"method":"tools/call","params":{

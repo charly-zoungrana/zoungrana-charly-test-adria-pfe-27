@@ -27,8 +27,8 @@ La consultation avant débit ne suffit pas à empêcher deux dépenses concurren
 
 ## Tolérance aux pannes
 
-`AccountCommunicationConfig` configure directement les registres Resilience4J, utilisés par `AccountGateway`.
-Pas de dépendance à des annotations AOP ou à un fallback retournant un faux compte.
+`AccountClient` porte les annotations Resilience4J `@CircuitBreaker` et les méthodes `default` de fallback. Les lectures utilisent aussi `@Retry`. `AccountCommunicationConfig` configure les registres et active leurs aspects Spring.
+Le circuit breaker est appliqué par Spring AOP au proxy Feign. Les fallbacks restent dans AccountClient et renvoient des erreurs explicites ; ils ne créent pas de faux compte. Avec Spring Boot 4, les aspects Resilience4J Spring sont enregistrés explicitement, sans auto-configuration Boot 3.
 
 - Connexion Feign : timeout 1 seconde.
 - Lecture Feign : timeout 2 secondes.

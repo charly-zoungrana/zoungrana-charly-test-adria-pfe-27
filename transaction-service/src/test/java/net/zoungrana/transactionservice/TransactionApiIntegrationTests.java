@@ -50,6 +50,10 @@ class TransactionApiIntegrationTests extends FeignTestSupport {
                     .isEqualByComparingTo(new BigDecimal("12.12345678"));
             HttpResponse<String> found = request(client, "/transactions/" + id, null);
             assertThat(found.statusCode()).isEqualTo(200);
+            JsonNode account = mapper.readTree(found.body()).path("account");
+            assertThat(account.path("id").asText()).isEqualTo(transaction.path("accountId").asText());
+            assertThat(account.path("currency").asText()).isEqualTo("MAD");
+            assertThat(account.path("customerReference").asText()).isEqualTo("test-account");
             assertThat(mapper.readTree(found.body()).path("id").asText()).isEqualTo(id);
             HttpResponse<String> listed = request(client, "/transactions", null);
             assertThat(listed.statusCode()).isEqualTo(200);
@@ -77,12 +81,14 @@ class TransactionApiIntegrationTests extends FeignTestSupport {
             String id = transaction.path("id").asText();
             assertThat(transaction.path("amount").asText()).isEqualTo("19.12345678");
             assertThat(Instant.parse(transaction.path("createdAt").asText())).isNotNull();
-            String query = "{ getTransactionById(id: \"" + id + "\") { id amount } getAllTransactions { id } }";
+            String query = "{ getTransactionById(id: \"" + id + "\") { id amount account { id customerReference balance } } getAllTransactions { id } }";
             HttpResponse<String> found = request(client, "/graphql", mapper.writeValueAsString(Map.of("query", query)));
             JsonNode foundResult = mapper.readTree(found.body());
             assertThat(foundResult.has("errors")).as(found.body()).isFalse();
             assertThat(foundResult.path("data").path("getTransactionById").path("id").asText()).isEqualTo(id);
             assertThat(foundResult.path("data").path("getAllTransactions").toString()).contains(id);
+            assertThat(foundResult.path("data").path("getTransactionById").path("account").path("id").asText())
+                    .isEqualTo("22222222-2222-2222-2222-222222222222");
             assertThat(request(client, "/transactions/" + id, null).statusCode()).isEqualTo(200);
         }
     }
