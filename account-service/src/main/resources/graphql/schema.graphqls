@@ -1,0 +1,28 @@
+type Query {
+    getAllAccounts: [Account!]!
+    getAccountById(id: ID!): Account!
+}
+
+type Mutation {
+    saveAccount(account: AccountInput!): Account!
+}
+
+type Account {
+    id: ID!
+    customerReference: String
+    status: Status
+    currency: String
+    balance: Float!
+}
+
+input AccountInput {
+    customerReference: String
+    status: Status
+    currency: String
+    balance: Float!
+}
+
+enum Status {
+    ACTIVE
+    BLOCKED
+}
