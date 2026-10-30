@@ -1,0 +1,154 @@
+11:28:59.762 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionApiIntegrationTests]: TransactionApiIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:28:59.959 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionApiIntegrationTests
+11:29:00.106 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionApiIntegrationTests]: TransactionApiIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:29:00.111 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionApiIntegrationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-30T11:29:02.311+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionApiIntegrationTests     : Starting TransactionApiIntegrationTests using Java 21.0.7 with PID 19728 (started by hp in C:\Users\hp\Desktop\TestAdria\e-bank-project-ms-adria-test\transaction-service)
+2026-10-30T11:29:02.314+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionApiIntegrationTests     : No active profile set, falling back to 1 default profile: "default"
+2026-10-30T11:29:06.076+01:00  INFO 19728 --- [transaction-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30T11:29:06.428+01:00  INFO 19728 --- [transaction-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 331 ms. Found 1 JPA repository interface.
+2026-10-30T11:29:06.983+01:00  INFO 19728 --- [transaction-service] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ed890456-db17-3fc4-b2de-d0145309a318
+2026-10-30T11:29:07.197+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.199+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'serverAnnotatedBeanRegistry' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration$ServerMcpAnnotatedBeans] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.199+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration' of type [org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.208+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.208+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerClientsDefaultsMappingsProvider' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration$$Lambda/0x000001918152bc70] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.212+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'defaultsBindHandlerAdvisor' of type [org.springframework.cloud.commons.config.DefaultsBindHandlerAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:07.224+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.ai.mcp.server.annotation-scanner-org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:08.026+01:00  INFO 19728 --- [transaction-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-10-30T11:29:08.059+01:00  INFO 19728 --- [transaction-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-30T11:29:08.059+01:00  INFO 19728 --- [transaction-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-10-30T11:29:08.181+01:00  INFO 19728 --- [transaction-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5777 ms
+2026-10-30T11:29:08.822+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-30T11:29:09.486+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:transaction-db user=SA
+2026-10-30T11:29:09.491+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-30T11:29:09.582+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30T11:29:09.787+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-10-30T11:29:10.994+01:00  INFO 19728 --- [transaction-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30T11:29:11.195+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:transaction-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TRANSACTION-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-30T11:29:13.056+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30T11:29:13.127+01:00  INFO 19728 --- [transaction-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30T11:29:13.333+01:00  INFO 19728 --- [transaction-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-30T11:29:13.884+01:00  WARN 19728 --- [transaction-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30T11:29:14.958+01:00  INFO 19728 --- [transaction-service] [           main] efaultSchemaResourceGraphQlSourceBuilder : Loaded 1 resource(s) in the GraphQL schema.
+2026-10-30T11:29:15.442+01:00  INFO 19728 --- [transaction-service] [           main] o.s.b.g.a.GraphQlAutoConfiguration       : GraphQL schema inspection:
+	Unmapped fields: {}
+	Unmapped registrations: {}
+	Unmapped arguments: {}
+	Field nullness errors: {}
+	Argument nullness errors: {}
+	Skipped types: []
+2026-10-30T11:29:15.492+01:00  INFO 19728 --- [transaction-service] [           main] s.b.g.a.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint HTTP POST /graphql
+2026-10-30T11:29:15.654+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable tools capabilities, notification: true
+2026-10-30T11:29:15.869+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Registered tools: 3
+2026-10-30T11:29:15.869+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources capabilities, notification: true
+2026-10-30T11:29:15.874+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources templates capabilities, notification: true
+2026-10-30T11:29:15.876+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable prompts capabilities, notification: true
+2026-10-30T11:29:15.880+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable completions capabilities
+2026-10-30T11:29:16.395+01:00  INFO 19728 --- [transaction-service] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:transaction-db'
+2026-10-30T11:29:17.771+01:00  INFO 19728 --- [transaction-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-10-30T11:29:17.808+01:00  INFO 19728 --- [transaction-service] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-10-30T11:29:17.982+01:00  WARN 19728 --- [transaction-service] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30T11:29:18.061+01:00  INFO 19728 --- [transaction-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 58891 (http) with context path '/'
+2026-10-30T11:29:19.082+01:00  INFO 19728 --- [transaction-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-10-30T11:29:19.099+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionApiIntegrationTests     : Started TransactionApiIntegrationTests in 18.41 seconds (process running for 21.048)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\hp\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.15\byte-buddy-agent-1.18.15.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2026-10-30T11:29:20.673+01:00  INFO 19728 --- [transaction-service] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-30T11:29:20.673+01:00  INFO 19728 --- [transaction-service] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-30T11:29:20.684+01:00  INFO 19728 --- [transaction-service] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2026-10-30T11:29:21.262+01:00  INFO 19728 --- [transaction-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionMcpIntegrationTests]: TransactionMcpIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-30T11:29:21.266+01:00  INFO 19728 --- [transaction-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionMcpIntegrationTests
+2026-10-30T11:29:21.269+01:00  INFO 19728 --- [transaction-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionMcpIntegrationTests]: TransactionMcpIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-30T11:29:21.272+01:00  INFO 19728 --- [transaction-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionMcpIntegrationTests
+2026-10-30T11:29:21.440+01:00  INFO 19728 --- [transaction-service] [o-auto-1-exec-4] i.m.server.McpAsyncServer                : Client initialize request - Protocol: 2025-03-26, Capabilities: ClientCapabilities[experimental=null, roots=null, sampling=null, elicitation=null], Info: Implementation[name=integration-test, title=null, version=1.0, description=null, icons=null, websiteUrl=null]
+2026-10-30T11:29:21.626+01:00  INFO 19728 --- [transaction-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionServiceApplicationTests]: TransactionServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-30T11:29:21.630+01:00  INFO 19728 --- [transaction-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionServiceApplicationTests
+2026-10-30T11:29:21.631+01:00  INFO 19728 --- [transaction-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [net.zoungrana.transactionservice.TransactionServiceApplicationTests]: TransactionServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-30T11:29:21.636+01:00  INFO 19728 --- [transaction-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration net.zoungrana.transactionservice.TransactionServiceApplication for test class net.zoungrana.transactionservice.TransactionServiceApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-30T11:29:22.762+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionServiceApplicationTests : Starting TransactionServiceApplicationTests using Java 21.0.7 with PID 19728 (started by hp in C:\Users\hp\Desktop\TestAdria\e-bank-project-ms-adria-test\transaction-service)
+2026-10-30T11:29:22.762+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionServiceApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2026-10-30T11:29:23.474+01:00  INFO 19728 --- [transaction-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30T11:29:23.499+01:00  INFO 19728 --- [transaction-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
+2026-10-30T11:29:23.619+01:00  INFO 19728 --- [transaction-service] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=dc1e0829-9e74-3fdf-8f44-1b680b155ae3
+2026-10-30T11:29:23.651+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.652+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'serverAnnotatedBeanRegistry' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration$ServerMcpAnnotatedBeans] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.655+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration' of type [org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.656+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.656+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerClientsDefaultsMappingsProvider' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration$$Lambda/0x000001918152bc70] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.657+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'defaultsBindHandlerAdvisor' of type [org.springframework.cloud.commons.config.DefaultsBindHandlerAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.661+01:00  WARN 19728 --- [transaction-service] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.ai.mcp.server.annotation-scanner-org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-30T11:29:23.726+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-30T11:29:23.727+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:transaction-db user=SA
+2026-10-30T11:29:23.728+01:00  INFO 19728 --- [transaction-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-30T11:29:23.730+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30T11:29:23.771+01:00  INFO 19728 --- [transaction-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30T11:29:23.773+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:transaction-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TRANSACTION-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-30T11:29:23.831+01:00  INFO 19728 --- [transaction-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30T11:29:23.840+01:00  INFO 19728 --- [transaction-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30T11:29:23.901+01:00  WARN 19728 --- [transaction-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30T11:29:24.066+01:00  INFO 19728 --- [transaction-service] [           main] efaultSchemaResourceGraphQlSourceBuilder : Loaded 1 resource(s) in the GraphQL schema.
+2026-10-30T11:29:24.087+01:00  INFO 19728 --- [transaction-service] [           main] o.s.b.g.a.GraphQlAutoConfiguration       : GraphQL schema inspection:
+	Unmapped fields: {}
+	Unmapped registrations: {}
+	Unmapped arguments: {}
+	Field nullness errors: {}
+	Argument nullness errors: {}
+	Skipped types: []
+2026-10-30T11:29:24.093+01:00  INFO 19728 --- [transaction-service] [           main] s.b.g.a.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint HTTP POST /graphql
+2026-10-30T11:29:24.127+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable tools capabilities, notification: true
+2026-10-30T11:29:24.134+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Registered tools: 3
+2026-10-30T11:29:24.134+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources capabilities, notification: true
+2026-10-30T11:29:24.136+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources templates capabilities, notification: true
+2026-10-30T11:29:24.136+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable prompts capabilities, notification: true
+2026-10-30T11:29:24.136+01:00  INFO 19728 --- [transaction-service] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable completions capabilities
+2026-10-30T11:29:24.173+01:00  INFO 19728 --- [transaction-service] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:transaction-db'
+2026-10-30T11:29:25.265+01:00  INFO 19728 --- [transaction-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-10-30T11:29:25.278+01:00  INFO 19728 --- [transaction-service] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-10-30T11:29:25.301+01:00  WARN 19728 --- [transaction-service] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30T11:29:25.320+01:00  INFO 19728 --- [transaction-service] [           main] n.z.t.TransactionServiceApplicationTests : Started TransactionServiceApplicationTests in 3.657 seconds (process running for 27.269)

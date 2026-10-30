@@ -1,0 +1,127 @@
+@baseUrl = http://localhost:8082
+@accountId = 11111111-1111-1111-1111-111111111111
+
+### REST - list transactions
+GET {{baseUrl}}/transactions
+
+### REST - create transaction (id and createdAt are generated)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "accountId": "{{accountId}}",
+  "amount": 250.50,
+  "currency": "MAD",
+  "merchantCategory": "GROCERY",
+  "country": "MA"
+}
+
+> {% client.global.set("transactionId", response.body.id); %}
+
+### REST - find the transaction created above
+GET {{baseUrl}}/transactions/{{transactionId}}
+
+### GraphQL - list transactions (amount is an exact decimal string)
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ getAllTransactions { id accountId amount currency merchantCategory country createdAt } }"
+}
+
+### GraphQL - find a transaction
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($id: ID!) { getTransactionById(id: $id) { id accountId amount currency createdAt } }",
+  "variables": { "id": "{{transactionId}}" }
+}
+
+### GraphQL - create a transaction
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { saveTransaction(transaction: { accountId: \"{{accountId}}\", amount: \"150.25\", currency: \"MAD\", merchantCategory: \"TRANSPORT\", country: \"MA\" }) { id amount createdAt } }"
+}
+
+### MCP - initialize session first
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {},
+    "clientInfo": { "name": "idea-http-client", "version": "1.0" }
+  }
+}
+
+> {% client.global.set("mcpSessionId", response.headers.valueOf("Mcp-Session-Id")); %}
+
+### MCP - confirm initialization
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: {{mcpSessionId}}
+MCP-Protocol-Version: 2025-03-26
+
+{ "jsonrpc": "2.0", "method": "notifications/initialized" }
+
+### MCP - list tools
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: {{mcpSessionId}}
+MCP-Protocol-Version: 2025-03-26
+
+{ "jsonrpc": "2.0", "id": 2, "method": "tools/list" }
+
+### MCP - list transactions
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: {{mcpSessionId}}
+MCP-Protocol-Version: 2025-03-26
+
+{
+  "jsonrpc": "2.0", "id": 3, "method": "tools/call",
+  "params": { "name": "getAllTransactions", "arguments": {} }
+}
+
+### MCP - find a transaction
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: {{mcpSessionId}}
+MCP-Protocol-Version: 2025-03-26
+
+{
+  "jsonrpc": "2.0", "id": 4, "method": "tools/call",
+  "params": { "name": "getTransactionById", "arguments": { "id": "{{transactionId}}" } }
+}
+
+### MCP - create a transaction
+POST {{baseUrl}}/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: {{mcpSessionId}}
+MCP-Protocol-Version: 2025-03-26
+
+{
+  "jsonrpc": "2.0", "id": 5, "method": "tools/call",
+  "params": {
+    "name": "saveTransaction",
+    "arguments": {
+      "transaction": {
+        "accountId": "{{accountId}}", "amount": "99.95", "currency": "MAD",
+        "merchantCategory": "SHOPPING", "country": "MA"
+      }
+    }
+  }
+}
