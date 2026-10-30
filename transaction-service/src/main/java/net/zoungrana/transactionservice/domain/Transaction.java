@@ -23,4 +23,6 @@ public class Transaction {
     private String country;
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
+    @Column(nullable = false)
+    private String processingStatus;
 }

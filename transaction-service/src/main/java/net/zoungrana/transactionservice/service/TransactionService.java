@@ -6,7 +6,8 @@ import net.zoungrana.transactionservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import net.zoungrana.transactionservice.feign.AccountGateway;
+import net.zoungrana.transactionservice.feign.AccountClient;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -18,6 +19,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TransactionService {
     private final TransactionRepository transactionRepository;
+    private final TransactionStateService transactionStateService;
+    private final AccountGateway accountGateway;
 
     @Value("${bank.transaction.max-amount:1000}")
     private BigDecimal maxAmount;
@@ -31,7 +34,6 @@ public class TransactionService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
     }
 
-    @Transactional
     public Transaction saveTransaction(Transaction transaction) {
         if (transaction.getId() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The transaction id is generated automatically");
@@ -52,7 +54,52 @@ public class TransactionService {
         if (transaction.getCurrency() == null || transaction.getCurrency().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Currency is required");
         }
+        AccountClient.AccountResponse account = accountGateway.getAccountById(transaction.getAccountId());
+        if (account == null || !transaction.getAccountId().equals(account.id()) || account.balance() == null) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Invalid account service response");
+        }
+        if (!"ACTIVE".equals(account.status())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account is not active");
+        }
+        if (!transaction.getCurrency().equals(account.currency())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Currency does not match account currency");
+        }
+        if (account.balance().compareTo(transaction.getAmount()) < 0) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Insufficient balance");
+        }
         transaction.setCreatedAt(Instant.now());
-        return transactionRepository.save(transaction);
+        return processDebit(transactionStateService.prepare(transaction));
+    }
+
+    public Transaction retryTransaction(UUID id) {
+        Transaction transaction = getTransactionById(id);
+        if ("COMPLETED".equals(transaction.getProcessingStatus())) {
+            return transaction;
+        }
+        if (!"PENDING".equals(transaction.getProcessingStatus())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Only pending transactions can be retried");
+        }
+        return processDebit(transaction);
+    }
+
+    private Transaction processDebit(Transaction transaction) {
+        try {
+
+            accountGateway.debitAccount(transaction.getAccountId(), new AccountClient.DebitRequest(
+                    transaction.getId(), transaction.getAmount(), transaction.getCurrency()));
+        } catch (ResponseStatusException ex) {
+            if (ex.getStatusCode().is4xxClientError()) {
+                transactionStateService.fail(transaction.getId());
+                throw ex;
+            }
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
+                    "Transaction " + transaction.getId() + " is PENDING; retry this id when account-service recovers", ex);
+        }
+        try {
+            return transactionStateService.complete(transaction.getId());
+        } catch (RuntimeException ex) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
+                    "Transaction " + transaction.getId() + " requires reconciliation; retry this id", ex);
+        }
     }
 }

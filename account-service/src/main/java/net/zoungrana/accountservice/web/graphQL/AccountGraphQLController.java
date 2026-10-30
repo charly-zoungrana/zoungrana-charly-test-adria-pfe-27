@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.UUID;
+import java.math.BigDecimal;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class AccountGraphQLController {
                 .customerReference(input.customerReference())
                 .status(input.status())
                 .currency(input.currency())
-                .balance(input.balance())
+                .balance(BigDecimal.valueOf(input.balance()))
                 .build();
         accountService.saveAccount(account);
         return account;

@@ -1,5 +1,10 @@
 @baseUrl = http://localhost:8082
-@accountId = 11111111-1111-1111-1111-111111111111
+@accountBaseUrl = http://localhost:8081
+
+### Fetch an actual account id before creating transactions
+GET {{accountBaseUrl}}/accounts
+
+> {% client.global.set("accountId", response.body.find(account => account.status === "ACTIVE").id); %}
 
 ### REST - list transactions
 GET {{baseUrl}}/transactions
@@ -125,3 +130,8 @@ MCP-Protocol-Version: 2025-03-26
     }
   }
 }
+### Check the actual account balance after recording a transaction
+GET {{accountBaseUrl}}/accounts/{{accountId}}
+
+### Retry the SAME pending transaction id; do not submit a new transaction
+POST {{baseUrl}}/transactions/{{transactionId}}/retry

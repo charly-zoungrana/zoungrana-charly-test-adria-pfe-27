@@ -15,6 +15,7 @@ type Transaction {
     merchantCategory: String
     country: String
     createdAt: String!
+    processingStatus: String!
 }
 
 input TransactionInput {

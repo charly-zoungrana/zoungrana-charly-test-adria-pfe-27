@@ -29,4 +29,8 @@ public class TransactionController {
     public Transaction saveTransaction(@RequestBody Transaction transaction) {
         return transactionService.saveTransaction(transaction);
     }
-}
+
+    @PostMapping("/transactions/{id}/retry")
+    public Transaction retryTransaction(@PathVariable UUID id) {
+        return transactionService.retryTransaction(id);
+    }}

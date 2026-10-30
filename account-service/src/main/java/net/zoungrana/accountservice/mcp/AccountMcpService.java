@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class AccountMcpService {
                 .customerReference(account.customerReference())
                 .status(account.status())
                 .currency(account.currency())
-                .balance(account.balance())
+                .balance(BigDecimal.valueOf(account.balance()))
                 .build();
         accountService.saveAccount(savedAccount);
         return savedAccount;

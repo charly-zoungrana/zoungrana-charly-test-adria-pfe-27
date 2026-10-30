@@ -15,7 +15,7 @@ import java.time.Duration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class TransactionMcpIntegrationTests {
+class TransactionMcpIntegrationTests extends FeignTestSupport {
     @LocalServerPort
     int port;
     @Autowired

@@ -21,7 +21,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class TransactionApiIntegrationTests {
+class TransactionApiIntegrationTests extends FeignTestSupport {
     @LocalServerPort
     int port;
     @Autowired
